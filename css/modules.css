@@ -1,0 +1,37 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid var(--theme-hover);
+  height: 60px;
+}
+header div {
+  width: 50%;
+}
+header h1 {
+  font-size: 28px;
+  color: var(--card-text);
+  font-weight: 700;
+  font-family: var(--caveat);
+}
+main {
+  padding: 75px 0px;
+
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+footer {
+  height: 60px;
+  color: var(--card-text);
+  font-size: 28px;
+  color: var(--card-text);
+  font-weight: 700;
+  font-family: var(--caveat);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--theme-hover);
+}
