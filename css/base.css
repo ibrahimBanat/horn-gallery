@@ -19,3 +19,22 @@ body {
   height: 100vh;
   overflow-y: scroll;
 }
+@media only screen and (max-width: 1110px) {
+  :root {
+    --num-cards: 2;
+  }
+}
+@media only screen and (max-width: 750px) {
+  :root {
+    --num-cards: 1;
+  }
+}
+@media only screen and (max-width: 300px) {
+  .card--ctr {
+    width: 100%;
+  }
+  .photo-template {
+    width: 80%;
+    flex-wrap: wrap;
+  }
+}
