@@ -6,27 +6,54 @@ $(document).ready(() => {
   $('.page').on('change', function () {
     let x = `${$(this).val()}`;
     if (x === 'page2') {
-      $('.2').removeClass('hide');
-      $('.s2').removeClass('hide');
-      $('.1').addClass('hide');
-      $('.s1').addClass('hide');
+      $('.2, .s2').removeClass('hide');
+      $('.1, .s1').addClass('hide');
     } else {
-      $('.1').removeClass('hide');
-      $('.s1').removeClass('hide');
-      $('.2').addClass('hide');
-      $('.s2').addClass('hide');
+      $('.1, .s1').removeClass('hide');
+      $('.2, .s2').addClass('hide');
     }
-
-    console.log(x);
-
-    // $(`.${x}`).show();
   });
 });
 
 $.when(
-  $.getJSON('./data/page-1.json', data => handleJSON(data, true)),
-  $.getJSON('./data/page-2.json', data => handleJSON(data, false))
+  $.getJSON('./data/page-1.json', data => {
+    handleJSON(data, true);
+
+    $('#f-title').on('change', function () {
+      sort();
+    });
+  }),
+
+  $.getJSON('./data/page-2.json', data => {
+    handleJSON(data, false);
+    // $('#f-title').on('change', function () {
+    //   sort();
+    // });
+  })
 );
+const sort = () => {
+  let q = $('.-').toArray();
+  q.forEach(item => {
+    item.className += ` ${(item.id = item.innerHTML[0].toLowerCase())}`;
+  });
+
+  q.sort(compare);
+  console.log(q);
+  q.forEach((n, index) => {
+    let h = $(`.${n.id}`).parents('.photo-template');
+
+    h.css('order', `${index + 1}`);
+  });
+};
+const compare = (a, b) => {
+  if (a.id < b.id) {
+    return -1;
+  }
+  if (a.id > b.id) {
+    return 1;
+  }
+  return 0;
+};
 
 let array = [];
 
@@ -37,7 +64,7 @@ const handleJSON = (data, token) => {
   });
   let unique = [...new Set(array)];
   unique.forEach(option => renderOption(option, token));
-  $('.photo-template').first().remove();
+  array = [];
 };
 
 const Data = function (object) {

@@ -1,16 +1,44 @@
 'use strict';
+$(document).ready(() => {
+  $('.2').addClass('hide');
+  $('.s2').addClass('hide');
+
+  $('.page').on('change', function () {
+    let x = `${$(this).val()}`;
+    if (x === 'page2') {
+      $('.2').removeClass('hide');
+      $('.s2').removeClass('hide');
+      $('.1').addClass('hide');
+      $('.s1').addClass('hide');
+    } else {
+      $('.1').removeClass('hide');
+      $('.s1').removeClass('hide');
+      $('.2').addClass('hide');
+      $('.s2').addClass('hide');
+    }
+
+    console.log(x);
+
+    // $(`.${x}`).show();
+  });
+});
+
+$.when(
+  $.getJSON('./data/page-1.json', data => handleJSON(data, true)),
+  $.getJSON('./data/page-2.json', data => handleJSON(data, false))
+);
 
 let array = [];
-$.ajax('./data/page-1.json').then(data => {
+
+const handleJSON = (data, token) => {
   data.forEach(object => {
     let dataOfCard = new Data(object);
-    dataOfCard.renderCard();
+    dataOfCard.renderCard(token);
   });
   let unique = [...new Set(array)];
-  unique.forEach(option => renderOption(option));
-
+  unique.forEach(option => renderOption(option, token));
   $('.photo-template').first().remove();
-});
+};
 
 const Data = function (object) {
   this.description = object.description;
@@ -22,27 +50,20 @@ const Data = function (object) {
   array.push(this.keyword);
 };
 
-Data.prototype.renderCard = function () {
-  // let templateCard = $('.photo-template').first().clone();
+Data.prototype.renderCard = function (token) {
   let template = $('#template').html();
-  console.log(this);
-  let rendered = Mustache.render(template, this);
-  // templateCard.find('h2').text(this.title);
 
-  // templateCard.find('img').attr('src', `${this.imageUrl}`);
-  // templateCard.find('p').text(this.description);
-  // templateCard.addClass(this.keyword);
-  // console.log(rendered);
-  $('.card--ctr').append(rendered);
+  let rendered = Mustache.render(template, this);
+  token ? $('.1').append(rendered) : $('.2').append(rendered);
 };
 
-const renderOption = option => {
+const renderOption = (option, token) => {
   let optionTemp = $('#options-template').html();
   let rendered = Mustache.render(optionTemp, { option });
-  $('.select').append(rendered);
+  token ? $('.s1').append(rendered) : $('.s2').append(rendered);
 };
 
-$('.select').on('change', function () {
+$('.drop').on('change', function () {
   $('.photo-template').hide();
   let x = `${$(this).val()}`;
   $(`.${x}`).show();
