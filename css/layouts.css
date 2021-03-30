@@ -77,18 +77,18 @@ img {
   padding: 5px 0px;
   padding-left: 20px;
   background-color: var(--theme-hover);
-  color: var(--card-text);
+  /* color: var(--card-text); */
   font-family: var(--londrina-solid);
   font-weight: 300;
   letter-spacing: 1.25px;
 }
-select {
-  -moz-appearance: none; /* Firefox */
-  -webkit-appearance: none; /* Safari and Chrome */
+/* select {
+  -moz-appearance: none; 
+  -webkit-appearance: none;
   appearance: none;
 }
 select option {
   color: var(--back);
   background: var(--theme-hover) !important;
   border-bottom: 1px solid green;
-}
+}  */
