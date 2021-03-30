@@ -1,4 +1,4 @@
-<!-- Note: you may use this starter code, but it is not a requirement -->
+<!-- Note: you may use Data starter code, but it is not a requirement -->
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +10,27 @@
     <link rel="stylesheet" href="./css/modules.css" />
     <link rel="stylesheet" href="./css/layouts.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.js"
+      integrity="sha512-SDpqS2G7Z70bGQSl26nhAdQj9YJoQqMOJVBVqE1EyEaAAzdvLFNZ0R06FzBu+E8xTcmbd2dBhvBJuJrbEUiKqA=="
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="template/text" id="template">
+      <div class="photo-template {{keyword}}">
+
+        <div class="img--p">
+          <p>{{description}}</p>
+          <img src="{{imageUrl}}" alt="{{keywords}}" />
+        </div>
+        <div class="heading--ctr">
+          <h2>{{title}}</h2>
+        </div>
+      </div>
+    </script>
+    <script type="template/text" id="options-template">
+      <option class="option">{{option}}</option>
+    </script>
   </head>
   <body>
     <header>
@@ -20,17 +41,7 @@
       </select>
     </header>
     <main>
-      <div class="card--ctr">
-        <div class="photo-template">
-          <div class="img--p">
-            <p></p>
-            <img src="" alt="" />
-          </div>
-          <div class="heading--ctr">
-            <h2></h2>
-          </div>
-        </div>
-      </div>
+      <div class="card--ctr"></div>
     </main>
     <footer>&copy; 2018 Code Fellows</footer>
     <script src="./js/app.js"></script>

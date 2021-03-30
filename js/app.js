@@ -23,18 +23,23 @@ const Data = function (object) {
 };
 
 Data.prototype.renderCard = function () {
-  let templateCard = $('.photo-template').first().clone();
+  // let templateCard = $('.photo-template').first().clone();
+  let template = $('#template').html();
+  console.log(this);
+  let rendered = Mustache.render(template, this);
+  // templateCard.find('h2').text(this.title);
 
-  templateCard.find('h2').text(this.title);
-
-  templateCard.find('img').attr('src', `${this.imageUrl}`);
-  templateCard.find('p').text(this.description);
-  templateCard.addClass(this.keyword);
-  $('.card--ctr').append(templateCard);
+  // templateCard.find('img').attr('src', `${this.imageUrl}`);
+  // templateCard.find('p').text(this.description);
+  // templateCard.addClass(this.keyword);
+  // console.log(rendered);
+  $('.card--ctr').append(rendered);
 };
 
 const renderOption = option => {
-  $('.select').append(`<option class="option">${option}</option>`);
+  let optionTemp = $('#options-template').html();
+  let rendered = Mustache.render(optionTemp, { option });
+  $('.select').append(rendered);
 };
 
 $('.select').on('change', function () {
