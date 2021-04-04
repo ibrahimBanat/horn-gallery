@@ -35,3 +35,6 @@ footer {
   align-items: center;
   border-top: 1px solid var(--theme-hover);
 }
+.hide {
+  display: none !important;
+}
